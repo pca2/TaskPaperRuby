@@ -7,7 +7,7 @@ end
 DOC = TaskPaperDocument.new(ENV["TASKPAPER_PATH"])
 
 def get_project(project)
-  existing_project = DOC.all_projects.filter { |i| i.title == "#{project}" }[0]
+  existing_project = DOC.all_projects.find { |i| i.title == "#{project}" }
   if existing_project
     return existing_project
   else
