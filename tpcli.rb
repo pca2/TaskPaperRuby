@@ -1,4 +1,4 @@
-require "./src/taskpaperdocument"
+require_relative "./src/taskpaperdocument"
 require "thor"
 if ENV["TASKPAPER_PATH"].nil?
   puts "ERROR: must specify ENV['TASKPAPER_PATH']"
