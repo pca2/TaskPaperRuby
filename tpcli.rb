@@ -67,6 +67,15 @@ class TPCLI < Thor
     project_obj = get_project(project_name)
     puts project_obj.to_text
   end
+
+  desc "projects", "list all projects"
+
+  def projects
+    all_projects = DOC.all_projects
+    all_projects.each do |project|
+      puts "#{project.title}"
+    end
+  end
 end
 
 #TODO: tasks completed yesterday
