@@ -7,9 +7,9 @@ end
 DOC = TaskPaperDocument.new(ENV["TASKPAPER_PATH"])
 
 def get_project(project)
-  existing_inbox = DOC.all_projects.filter { |i| i.title == "#{project}" }[0]
-  if existing_inbox
-    return existing_inbox
+  existing_project = DOC.all_projects.filter { |i| i.title == "#{project}" }[0]
+  if existing_project
+    return existing_project
   else
     return DOC.add_child(TaskPaperItem.new("#{project}:"))
   end
