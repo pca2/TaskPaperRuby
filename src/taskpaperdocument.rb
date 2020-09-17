@@ -143,6 +143,26 @@ class TaskPaperDocument
 	def all_tasks_not_done
 		return all_tasks.select { |item| !(item.done?) }
 	end
+
+	def all_tasks_done
+		return all_tasks.select { |item| (item.done?) }
+	end
+
+	def done_yesterday
+		return all_tasks_done.select { |item|
+			if item.has_tag?("done")
+				done = item.tag_value("done")
+				if done != ""
+					require 'Date'
+					done_date = Date.parse(done)
+					yesterday = Date.today.prev_day
+					yesterday == done_date
+				end
+			else
+				false
+			end
+		}
+	end
 	
 	def due_today
 		return all_tasks_not_done.select { |item|
