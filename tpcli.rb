@@ -48,6 +48,18 @@ class TPCLI < Thor
     end
   end
 
+  desc "tomorrow", "Return all undone tasks due tomorrow"
+
+  def tomorrow
+    items = DOC.due_tomorrow
+    if items.empty?
+      puts "No tasks due tomorrow"
+    end
+    items.each do |item|
+      puts "#{item}"
+    end
+  end
+
   desc "tag TAG", "return all undone tasks with @TAG"
 
   def tag(tag)

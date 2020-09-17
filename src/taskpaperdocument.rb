@@ -161,6 +161,22 @@ class TaskPaperDocument
 			end
 		}
 	end
+
+	def due_tomorrow
+		return all_tasks_not_done.select { |item|
+			if item.has_tag?("due")
+				due = item.tag_value("due")
+				if due != ""
+					require 'Date'
+					due_date = Date.parse(due)
+					tomorrow = Date.today.next
+					tomorrow == due_date
+				end
+			else
+				false
+			end
+		}
+	end
 	
 	def all_items_with_tag(tag, value = nil)
 		return all_items.select { |item|
