@@ -1,3 +1,4 @@
+#! /usr/bin/env ruby
 require_relative "./src/taskpaperdocument"
 require "thor"
 if ENV["TASKPAPER_PATH"].nil?
