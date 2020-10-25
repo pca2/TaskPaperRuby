@@ -22,8 +22,9 @@ def add_item_to_project(project, item)
 end
 
 class TPCLI < Thor
-  desc "add TASK -p PROJECT", "Add TASK. PROJECT defaults to 'Inbox' if not specified"
+  desc "add TASK -p PROJECT -d done?", "Add TASK. PROJECT defaults to 'Inbox' if not specified"
   option :project_string, :default => ["Inbox"], :aliases => :p, :type => :array
+  option :done, :default => false, :aliases => :d, :type => :boolean
 
   def add(*tasks)
     task_string = tasks.join(" ")
@@ -32,6 +33,10 @@ class TPCLI < Thor
       exit 1
     end
     project_string = options[:project_string].join(" ")
+    if options[:done]
+      todays_date = Date.today.strftime("%Y-%m-%d")
+      task_string = task_string + " @done(#{todays_date})"
+    end
     project_obj = get_project(project_string)
     add_item_to_project(project_obj, task_string)
   end
